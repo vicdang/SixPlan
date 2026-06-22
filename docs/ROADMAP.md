@@ -91,7 +91,7 @@
 
 | Sprint | Status | Started | Completed | Notes |
 |---|---|---|---|---|
-| Sprint 1 | Not started | — | — | — |
+| Sprint 1 | Completed | 2026-06-22 | 2026-06-22 | — |
 | Sprint 2 | Not started | — | — | — |
 | Sprint 3 | Not started | — | — | — |
 | Sprint 4 | Not started | — | — | — |

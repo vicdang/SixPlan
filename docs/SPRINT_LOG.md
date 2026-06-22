@@ -8,26 +8,22 @@
 
 ## Current Sprint
 
-**Sprint:** *(not started)*
-**Started:** —
-**Target completion:** —
-**Spec reference:** ADDENDUM §23
+**Sprint:** Sprint 1 — Foundation
+**Started:** 2026-06-22
+**Target completion:** 2026-06-22
+**Spec reference:** ADDENDUM §23 Sprint 1
 
 ---
 
 ## Active TODO
 
-*(Agent populates this from ROADMAP at sprint start, and updates checkboxes as it goes)*
-
-- [ ] Read ROADMAP.md and pick next sprint
-- [ ] Read relevant spec sections for this sprint
-- [ ] List files to create/modify
-- [ ] Implement
-- [ ] Verify (start server, hit endpoint, click UI)
-- [ ] Commit
-- [ ] Update SPRINT_LOG progress
-- [ ] Surface BACKLOG items
-- [ ] Update ROADMAP status table
+- [x] `docker-compose.yml`, `nginx.conf` (infrastructure)
+- [x] Backend skeleton: `main.py`, `config.py`, `database.py`, `dependencies.py`
+- [x] All SQLAlchemy models per SPEC §4
+- [x] Alembic setup + initial migration + seed data (admin + facilities)
+- [x] Frontend scaffold: `package.json`, Vite + Tailwind config + shadcn `components.json`
+- [x] Tailwind config with design tokens per SPEC §7.2
+- [x] AppShell layout (Sidebar + Topbar stubs)
 
 ---
 
@@ -35,10 +31,39 @@
 
 *(Append-only log of work sessions, newest at top)*
 
+### [2026-06-22 09:00] Session Start
+**Goal:** Build Sprint 1 Foundation — infrastructure, backend skeleton + all models, Alembic seed, frontend scaffold, AppShell.
+**Plan:**
+- Create docker-compose.yml, nginx.conf
+- Backend: config.py, database.py, dependencies.py, main.py
+- Backend: all 11 SQLAlchemy model files
+- Backend: Alembic setup + initial migration with seed data
+- Frontend: package.json, vite.config.ts, tailwind.config.ts, components.json
+- Frontend: AppShell, Sidebar, Topbar stubs + root pages
+
 ### [YYYY-MM-DD HH:MM] Session Start
 **Goal:** —
 **Plan:**
 - —
+
+### [2026-06-22 11:00] Session End
+**Completed:**
+- docker-compose.yml, nginx.conf, frontend/Dockerfile, backend/Dockerfile
+- backend/app/config.py, database.py, dependencies.py, main.py
+- All 11 SQLAlchemy model files (department, member, account, project, facility, room, seat, assignment, seat_request, notification, audit_log)
+- backend/alembic/env.py (async), alembic/versions/001_initial_schema_and_seed.py (schema + seed: admin, facilities, dev departments)
+- frontend: package.json, vite.config.ts, tailwind.config.ts, postcss.config.js, components.json, index.html
+- frontend/src: main.tsx, App.tsx, index.css, lib/{utils,queryClient,auth-storage,axios}.ts
+- frontend/src/store/authStore.ts, types/{auth,common}.ts
+- frontend/src/components/layout: AppShell.tsx, Sidebar.tsx, Topbar.tsx, PageHeader.tsx
+- frontend/src/pages/errors: NotFoundPage.tsx, ForbiddenPage.tsx
+**Blocked:**
+- None
+**Carried to next session:**
+- User must run: cp .env.example .env (fill DB_PASSWORD + JWT_SECRET_KEY), docker compose up -d db redis, cd backend && pip install -r requirements.txt && alembic upgrade head
+- Verify: psql seat_mgmt and check admin account + facilities seeded
+**New backlog items:**
+- None
 
 ### [YYYY-MM-DD HH:MM] Session End
 **Completed:**
