@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
+from app.routers import auth as auth_router
+from app.routers import profile as profile_router
 
 
 app = FastAPI(
@@ -54,6 +56,10 @@ async def validation_handler(request: Request, exc: RequestValidationError):
             }
         },
     )
+
+
+app.include_router(auth_router.router, prefix="/api/v1")
+app.include_router(profile_router.router, prefix="/api/v1")
 
 
 @app.get("/health")

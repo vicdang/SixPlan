@@ -8,22 +8,24 @@
 
 ## Current Sprint
 
-**Sprint:** Sprint 1 — Foundation
+**Sprint:** Sprint 2 — Auth + Profile
 **Started:** 2026-06-22
 **Target completion:** 2026-06-22
-**Spec reference:** ADDENDUM §23 Sprint 1
+**Spec reference:** ADDENDUM §23 Sprint 2, §14, §15
 
 ---
 
 ## Active TODO
 
-- [x] `docker-compose.yml`, `nginx.conf` (infrastructure)
-- [x] Backend skeleton: `main.py`, `config.py`, `database.py`, `dependencies.py`
-- [x] All SQLAlchemy models per SPEC §4
-- [x] Alembic setup + initial migration + seed data (admin + facilities)
-- [x] Frontend scaffold: `package.json`, Vite + Tailwind config + shadcn `components.json`
-- [x] Tailwind config with design tokens per SPEC §7.2
-- [x] AppShell layout (Sidebar + Topbar stubs)
+- [x] Backend: `auth_service.py`, `schemas/auth.py`, `/auth` router (login/logout/refresh/me/change-password)
+- [x] Backend: `schemas/profile.py`, `/profile` router (get/update/assignments/requests/change-password)
+- [x] Frontend: shadcn UI components (button, input, label, card, separator, badge, avatar, dropdown-menu, dialog, sheet)
+- [x] Frontend: `RequireAuth` component + `useAuth` hook
+- [x] Frontend: `LoginPage` per ADDENDUM §14.1
+- [x] Frontend: Topbar avatar dropdown (logout)
+- [x] Frontend: `ProfilePage` (read-only + edit modal + change password modal)
+- [x] Frontend: App routing wired (login redirect, RequireAuth gates, profile route)
+- [ ] Smoke test: login → profile → logout flow
 
 ---
 
@@ -41,10 +43,13 @@
 - Frontend: package.json, vite.config.ts, tailwind.config.ts, components.json
 - Frontend: AppShell, Sidebar, Topbar stubs + root pages
 
-### [YYYY-MM-DD HH:MM] Session Start
-**Goal:** —
+### [2026-06-23 09:00] Session Start
+**Goal:** Implement Sprint 2 — full auth flow (login/logout/refresh/me) + profile page (read + edit + change password).
 **Plan:**
-- —
+- Backend: redis_client.py, schemas/auth.py, services/auth_service.py, routers/auth.py
+- Backend: schemas/profile.py, routers/profile.py, update main.py + dependencies.py
+- Frontend: 10 shadcn UI components, RequireAuth, useAuth hook
+- Frontend: LoginPage, ProfilePage, Topbar dropdown, App routing
 
 ### [2026-06-22 11:00] Session End
 **Completed:**
@@ -65,15 +70,30 @@
 **New backlog items:**
 - None
 
-### [YYYY-MM-DD HH:MM] Session End
+### [2026-06-22 14:00] Session End
 **Completed:**
-- —
+- backend/app/redis_client.py (fail-open Redis wrapper)
+- backend/app/schemas/auth.py, schemas/profile.py
+- backend/app/services/auth_service.py (authenticate, blacklist, refresh, change-password)
+- backend/app/routers/auth.py (login, logout, refresh, me, change-password)
+- backend/app/routers/profile.py (get, update, assignments, change-password)
+- backend/app/main.py updated (router includes)
+- backend/app/dependencies.py updated (JWT blacklist check, fail-open)
+- frontend/src/components/ui: button, input, label, card, separator, badge, avatar, dropdown-menu, dialog, sheet
+- frontend/src/store/authStore.ts updated (setHydrated, setAccount sets isHydrated)
+- frontend/src/hooks/useAuth.ts (useMe, useLogin, useLogout, useChangePassword)
+- frontend/src/components/auth/RequireAuth.tsx
+- frontend/src/pages/auth/LoginPage.tsx
+- frontend/src/pages/profile/ProfilePage.tsx
+- frontend/src/components/layout/Topbar.tsx updated (avatar dropdown with My Profile + Sign out)
+- frontend/src/App.tsx updated (full routing + auth hydration on mount)
 **Blocked:**
-- —
+- Smoke test deferred — requires running DB + Redis (Docker or manual setup)
 **Carried to next session:**
-- —
+- User must run `docker compose up -d db redis && alembic upgrade head` to enable smoke test
+- Smoke test: login → profile → logout flow
 **New backlog items:**
-- —
+- None
 
 ---
 

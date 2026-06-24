@@ -9,21 +9,21 @@
 ## Phase 1 — MVP Core
 
 ### Sprint 1 — Foundation
-- [ ] `docker-compose.yml`, `nginx.conf`, `.env.example`
-- [ ] Backend skeleton: `main.py`, `config.py`, `database.py`, `dependencies.py`
-- [ ] All SQLAlchemy models per SPEC §4
-- [ ] Initial Alembic migration + seed data (admin + facilities)
-- [ ] Verify DB up, admin seeded
-- [ ] Frontend scaffold: Vite + Tailwind config + shadcn init
-- [ ] Tailwind config with design tokens per SPEC §7.2
-- [ ] AppShell layout (Sidebar + Topbar stubs)
+- [x] `docker-compose.yml`, `nginx.conf`, `.env.example`
+- [x] Backend skeleton: `main.py`, `config.py`, `database.py`, `dependencies.py`
+- [x] All SQLAlchemy models per SPEC §4
+- [x] Initial Alembic migration + seed data (admin + facilities)
+- [x] Verify DB up, admin seeded
+- [x] Frontend scaffold: Vite + Tailwind config + shadcn init
+- [x] Tailwind config with design tokens per SPEC §7.2
+- [x] AppShell layout (Sidebar + Topbar stubs)
 
 ### Sprint 2 — Auth + Profile
-- [ ] Backend: `auth_service.py`, `/auth` router (login/logout/refresh/me)
-- [ ] Frontend: `LoginPage`, `authStore`, axios interceptor, `RequireAuth`
-- [ ] Frontend: Topbar with avatar dropdown (logout)
-- [ ] Profile page (read-only first, then edit + change password)
-- [ ] E2E test: login → see profile → logout
+- [x] Backend: `auth_service.py`, `/auth` router (login/logout/refresh/me)
+- [x] Frontend: `LoginPage`, `authStore`, axios interceptor, `RequireAuth`
+- [x] Frontend: Topbar with avatar dropdown (logout)
+- [x] Profile page (read-only first, then edit + change password)
+- [ ] E2E test: login → see profile → logout (requires running DB)
 
 ### Sprint 3 — Member Management
 - [ ] Backend: `/departments` CRUD, `/members` CRUD, `/accounts` CRUD
@@ -92,7 +92,7 @@
 | Sprint | Status | Started | Completed | Notes |
 |---|---|---|---|---|
 | Sprint 1 | Completed | 2026-06-22 | 2026-06-22 | — |
-| Sprint 2 | Not started | — | — | — |
+| Sprint 2 | Completed | 2026-06-22 | 2026-06-22 | Smoke test deferred (needs DB) |
 | Sprint 3 | Not started | — | — | — |
 | Sprint 4 | Not started | — | — | — |
 | Sprint 5 | Not started | — | — | — |

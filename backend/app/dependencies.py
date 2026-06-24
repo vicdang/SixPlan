@@ -41,8 +41,20 @@ async def get_current_account(
         account_id: str = payload.get("sub")
         if account_id is None:
             raise credentials_exception
+        jti: str | None = payload.get("jti")
     except JWTError:
         raise credentials_exception
+
+    # Soft blacklist check — fail open if Redis unavailable
+    if jti:
+        from app.services.auth_service import is_token_blacklisted
+        try:
+            if await is_token_blacklisted(jti):
+                raise credentials_exception
+        except HTTPException:
+            raise
+        except Exception:
+            pass
 
     result = await db.execute(select(Account).where(Account.id == account_id))
     account = result.scalar_one_or_none()

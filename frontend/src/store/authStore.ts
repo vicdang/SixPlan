@@ -7,22 +7,19 @@ interface AuthStore {
   isHydrated: boolean
   setAccount: (user: AuthUser) => void
   clearAccount: () => void
-  hydrate: () => void
+  setHydrated: () => void
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
   account: null,
   isHydrated: false,
 
-  setAccount: (user) => set({ account: user }),
+  setAccount: (user) => set({ account: user, isHydrated: true }),
 
   clearAccount: () => {
     tokenStorage.clear()
     set({ account: null })
   },
 
-  hydrate: () => {
-    // Will be populated in Sprint 2 with token validation
-    set({ isHydrated: true })
-  },
+  setHydrated: () => set({ isHydrated: true }),
 }))
